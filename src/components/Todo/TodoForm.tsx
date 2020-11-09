@@ -5,8 +5,8 @@ import { useField, Form, FormikProps, Formik, FieldConfig, FieldHookConfig } fro
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Button, TextField } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { todoActions } from '../actions';
-import {getRandomInt} from '../utils/data'
+import { todoActions } from '../../actions';
+import {getRandomInt} from '../../utils/data'
 
 
 interface Values {

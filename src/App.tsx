@@ -23,7 +23,7 @@ const App = () => {
 
   return (
    <React.Fragment>
-     <Home title="Hello World" />
+     <Home />
    </React.Fragment>
   
   )
