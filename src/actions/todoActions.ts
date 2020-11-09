@@ -1,8 +1,9 @@
 import { Dispatch } from 'react';
 import { todoConstants } from '../constants'
 import { todoService } from '../services/todoService'
+import { Todo } from '../types/todos';
 
-export const todoActions = {getAllTodos, deleteTodo}
+export const todoActions = {getAllTodos, deleteTodo, createTodo}
 
 function getAllTodos(service: any = todoService.getAllTodos) {
     return (dispatch: Dispatch<any>) => {
@@ -60,5 +61,33 @@ function deleteTodo(id: number, service = todoService.deleteTodo) {
 
     function failure(error: Error) {
         return {type: todoConstants.DELETE_TODO_FAILURE, error}
+    }
+}
+
+function createTodo(todoRequest: Todo, service = todoService.createTodo) {
+
+    return (dispatch: Dispatch<any>) => {
+        dispatch(request(todoRequest))
+
+        return service(todoRequest).then(
+            (response: any) => {
+                dispatch(success());
+            },
+            (error: any) => {
+                dispatch(failure(error.response.data.message));
+            }
+        )
+    }
+
+    function request(payload: Todo) {
+        return {type: todoConstants.CREATE_TODO_REQUEST, payload}
+    }
+
+    function success() {
+        return {type: todoConstants.CREATE_TODO_SUCCESS}
+    }
+
+    function failure(error: Error) {
+        return {type: todoConstants.CREATE_TODO_FAILURE, error}
     }
 }

@@ -13,7 +13,7 @@ const Navbar: FC<{}> = () => (
         <Toolbar>
        
           <Typography variant="h6" color="inherit" noWrap>
-            inteligentnyprogramista.pl
+            Typescript Todo Application
           </Typography>
         </Toolbar>
       </AppBar>

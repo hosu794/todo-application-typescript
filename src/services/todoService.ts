@@ -4,7 +4,7 @@ import axios, { AxiosResponse } from 'axios'
 import { Todo } from '../types/todos';
 
 export const todoService: any = {
-    getAllTodos, deleteTodo
+    getAllTodos, deleteTodo, createTodo
 }
 
 
@@ -23,4 +23,15 @@ function deleteTodo(id: number): any {
             "Content-Type": "application/json"
         }
     });
+}
+
+function createTodo(request: Todo): any {
+
+    let body = JSON.stringify(request)
+
+    return axios.post(`${apiConstants}/todos`, body, {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }) 
 }

@@ -1,57 +1,90 @@
 import React from 'react'
 import * as yup from 'yup';
+import uuid from 'uuid'
+import { useField, Form, FormikProps, Formik, FieldConfig, FieldHookConfig } from 'formik';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Button, TextField } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { todoActions } from '../actions';
+import {getRandomInt} from '../utils/data'
 
-import {
-    Formik,
-    FormikHelpers,
-    FormikProps,
-    Form,
-    Field,
-    FieldProps,
-  } from 'formik';
 
-interface MyFormValues {
-    content: string
+interface Values {
+    title: string
 }
 
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+        width: '25ch',
+      },
+    },
+  }),
+);
  
-const contentSchema = yup.object().shape({
-    content: yup.string().required("Content is required")
+const titleSchema = yup.object().shape({
+    title: yup.string().required("title is required")
   });
 
+
+
+  const MyTextField = ({ label, ...props }: { [x: string]: any; name: string, label?: string }) => {
+    const [field, meta, helpers] = useField(props);
+    return (
+      <>
+        <label>
+          {label}
+          <TextField {...field} {...props} />
+        </label>
+        {meta.touched && meta.error ? (
+          <div className="error">{meta.error}</div>
+        ) : null}
+      </>
+    );
+  };
+ 
+  
+
 const SimpleForm: React.FC<{}> = () => {
-    const initialValues: MyFormValues = {content: ""}
+
+    const classes = useStyles();
+
+    const dispatch = useDispatch();
 
     return (
-        <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column'
-        }}>
-            <h1>My Example</h1>
-            <Formik
-            initialValues={initialValues}
-            validationSchema={contentSchema}
-            onSubmit={(values, actions) => {
-                console.log({values, actions})
-                alert(JSON.stringify(values, null, 2))
-                actions.setSubmitting(false)
-            }}
-            >
-                 {({ errors, touched }) => (
-                 <Form>
-                <label htmlFor="content">Content</label>
-                <Field id="content" name="content" placeholder="Content" />
-                {errors.content && touched.content ? (
-                 <div>{errors.content}</div>
-           ) : null}
-           <br/>
-                <button type="submit">Submit</button>
-                </Form>  
-                )}
-            </Formik>
-        </div>
+        <div>
+    
+     <Formik 
+       initialValues={{
+        title: ""
+       }}
+       onSubmit={(values, actions) => {
+          console.log(values.title)
+
+          const newTodo = {
+            userId: getRandomInt(400, 20000),
+            id: getRandomInt(400, 20000),
+            title: values.title,
+            completed: false
+          }
+
+          dispatch(todoActions.createTodo(newTodo))
+
+       }}
+     >
+       {(props: FormikProps<Values>) => (
+         <Form className={classes.root}>
+           <MyTextField placeholder="Create new todo..." name="title" type="text" />
+           <Button  type="submit" size="small" variant="outlined" color="primary">
+                      Create a todoList
+          </Button>
+         </Form>
+       )}
+     </Formik>
+   </div>
     )
 }
 

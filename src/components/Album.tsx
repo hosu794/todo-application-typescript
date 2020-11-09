@@ -19,6 +19,7 @@ import {RootState} from '../reducers'
 import { Todo } from '../types/todos';
 import { todoActions } from '../actions';
 
+
 function Copyright() {
 
 
@@ -67,7 +68,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Album() {
 
@@ -92,17 +92,15 @@ export default function Album() {
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-            Personal blog.
+            Todo Application
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              This is personal blog about programming in Typescript and Java.
+              This is an application that i have created to learn a typescript skills.
             </Typography>
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button  variant="outlined" color="primary">
-                    Load all 
-                  </Button>
+                  <Form />
                 </Grid>
                
               </Grid>

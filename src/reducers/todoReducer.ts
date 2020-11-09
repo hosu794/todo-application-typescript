@@ -27,18 +27,28 @@ export default function todoReducer(state: initialStateTodos = {todos: []}, acti
             }
         case contants.GET_ALL_TODOS_FAILURE: 
         case contants.DELETE_TODO_FAILURE:
+        case contants.CREATE_TODO_FAILURE:
             return {
                 ...state, 
                 loading: false, 
                 error: action.error
             }
         case contants.DELETE_TODO_REQUEST: 
-        console.log("ID: " + action.payload)
             return {
                 todos: state.todos.filter(item => item.id !== action.payload),
                 deleting: true,
             }
-        console.log(state.todos)
+        case contants.CREATE_TODO_REQUEST: 
+            return {
+                ...state, 
+                todos: [...state.todos, action.payload],
+                creating: true
+            }
+        case contants.CREATE_TODO_SUCCESS: 
+            return {
+                ...state, 
+                creating: false
+            }
         case contants.DELETE_TODO_SUCCESS: 
             return {
                 ...state,
