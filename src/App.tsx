@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
 
-function App() {
+import Home from './components/Home'
+
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import { useDispatch, useSelector } from 'react-redux';
+import { todoActions } from './actions';
+
+
+
+const App = () => {
+
+  const dispatch = useDispatch();
+  
+
+  useEffect(() => {
+    console.log("Fetch")
+    
+    dispatch(todoActions.getAllTodos())
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   <React.Fragment>
+     <Home title="Hello World" />
+   </React.Fragment>
+  
+  )
 }
 
 export default App;

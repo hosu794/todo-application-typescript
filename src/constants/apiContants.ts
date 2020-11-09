@@ -1,0 +1,1 @@
+export const apiConstants = "https://jsonplaceholder.typicode.com";
