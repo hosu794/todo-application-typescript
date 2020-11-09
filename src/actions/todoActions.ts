@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 import { todoConstants } from '../constants'
 import { todoService } from '../services/todoService'
-import { Todo } from '../types/todos';
+import { Todo, TodoActionTypes } from '../types/todos';
 
 export const todoActions = {getAllTodos, deleteTodo, createTodo}
 
@@ -22,15 +22,15 @@ function getAllTodos(service: any = todoService.getAllTodos) {
         )
 }
 
-    function request() {
+    function request(): TodoActionTypes {
         return {type: todoConstants.GET_ALL_TODOS_REQUEST}
     }
 
-    function success(payload: Array<any>) {
+    function success(payload: Array<any>): TodoActionTypes {
         return {type: todoConstants.GET_ALL_TODOS_SUCCESS, payload}
     }
 
-    function failure(error: Error) {
+    function failure(error: Error): TodoActionTypes {
         return {type: todoConstants.GET_ALL_TODOS_FAILURE, error}
     }
 
@@ -51,15 +51,15 @@ function deleteTodo(id: number, service = todoService.deleteTodo) {
         )
     }
 
-    function request(id: number) {
+    function request(id: number): TodoActionTypes {
         return {type: todoConstants.DELETE_TODO_REQUEST, payload: id}
     }
 
-    function success(payload: any) {
+    function success(payload: any): TodoActionTypes {
         return {type: todoConstants.DELETE_TODO_SUCCESS, payload}
     }
 
-    function failure(error: Error) {
+    function failure(error: Error): TodoActionTypes {
         return {type: todoConstants.DELETE_TODO_FAILURE, error}
     }
 }
@@ -79,15 +79,15 @@ function createTodo(todoRequest: Todo, service = todoService.createTodo) {
         )
     }
 
-    function request(payload: Todo) {
+    function request(payload: Todo): TodoActionTypes {
         return {type: todoConstants.CREATE_TODO_REQUEST, payload}
     }
 
-    function success() {
+    function success(): TodoActionTypes {
         return {type: todoConstants.CREATE_TODO_SUCCESS}
     }
 
-    function failure(error: Error) {
+    function failure(error: Error): TodoActionTypes {
         return {type: todoConstants.CREATE_TODO_FAILURE, error}
     }
 }

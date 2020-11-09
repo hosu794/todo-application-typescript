@@ -1,9 +1,10 @@
 import {apiConstants} from '../constants/apiContants'
 
 import axios, { AxiosResponse } from 'axios'
-import { Todo } from '../types/todos';
+import { Todo, todoServiceType } from '../types/todos';
 
-export const todoService: any = {
+
+export const todoService: todoServiceType = {
     getAllTodos, deleteTodo, createTodo
 }
 
