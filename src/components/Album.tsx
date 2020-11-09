@@ -73,10 +73,6 @@ export default function Album() {
 
   const todos = useSelector<RootState, any>(state => state.todos.todos);
 
-  useEffect(() => {
-
-  }, [todos])
-
   const dispatch = useDispatch();
 
   const deleteTodo = (id: number) => {
@@ -84,6 +80,8 @@ export default function Album() {
   }
 
   const classes = useStyles();
+
+  useEffect(() => {console.log("Todos array changed. ")}, [todos])
 
   return (
     <React.Fragment>
@@ -114,7 +112,7 @@ export default function Album() {
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {todos.map((todo: Todo) => (
+            {todos ? todos.map((todo: Todo) => (
               <Grid item key={todo.id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardContent className={classes.cardContent}>
@@ -132,7 +130,7 @@ export default function Album() {
                   </CardActions>
                 </Card>
               </Grid>
-            ))}
+            )) : "...Loading"}
           </Grid>
         </Container>
       </main>
