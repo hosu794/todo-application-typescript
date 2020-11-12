@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Album() {
 
-  const todos = useSelector<RootState, any>(state => state.todos.todos);
+  const todos = useSelector<RootState, Todo[]>(state => state.todos.todos);
 
   const dispatch = useDispatch();
 

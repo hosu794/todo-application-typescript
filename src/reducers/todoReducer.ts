@@ -3,7 +3,7 @@ import {todoConstants as contants} from '../constants'
 import { Todo } from '../types/todos'
 
  type initialStateTodos = {
-    todos: Array<any>
+    todos: Todo[]
 }
 
 type actionType = {

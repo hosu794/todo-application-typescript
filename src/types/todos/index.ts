@@ -16,7 +16,8 @@ export type todoServiceType = {
 
 
 export interface GetAllTodosRequestAction {
-    type: typeof constants.GET_ALL_TODOS_REQUEST
+    type: typeof constants.GET_ALL_TODOS_REQUEST,
+    payload?: any
 }
 
 export interface GetAllTodosSuccessAction {
@@ -50,7 +51,8 @@ export interface createTodoRequestAction {
 }
 
 export interface createTodoSuccessAction {
-    type: typeof constants.CREATE_TODO_SUCCESS
+    type: typeof constants.CREATE_TODO_SUCCESS,
+    payload?: any
 }
 
 export interface createTodoFailureAction {

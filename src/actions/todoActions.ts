@@ -5,7 +5,7 @@ import { Todo, TodoActionTypes } from '../types/todos';
 
 export const todoActions = {getAllTodos, deleteTodo, createTodo}
 
-function getAllTodos(service: any = todoService.getAllTodos) {
+function getAllTodos(service = todoService.getAllTodos) {
     return (dispatch: Dispatch<any>) => {
 
         dispatch(request());
