@@ -1,18 +1,16 @@
 import { Container } from '@material-ui/core'
 import {todoConstants as contants} from '../constants'
-import { Todo } from '../types/todos'
+import { Todo, TodoActionTypes } from '../types/todos'
 
  type initialStateTodos = {
-    todos: Todo[]
+    todos: Todo[],
+    loading?: boolean, 
+    error?: Error,
+    deleting?: boolean,
+    creating?: boolean
 }
 
-type actionType = {
-    type: string,
-    payload?: any,
-    error?: Error
-}
-
-export default function todoReducer(state: initialStateTodos = {todos: []}, action: actionType): any {
+export default function todoReducer(state: initialStateTodos = {todos: []}, action: any): initialStateTodos {
     switch (action.type) {
         case contants.GET_ALL_TODOS_REQUEST:
             return {

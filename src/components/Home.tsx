@@ -22,9 +22,6 @@ import TodoItem from './Todo/TodoItem';
 import Footer from './layout/Footer';
 import Header from './layout/Header';
 
-
-
-
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
@@ -56,7 +53,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(6),
   },
 }));
-
 
 export default function Album() {
 

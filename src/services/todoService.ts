@@ -1,16 +1,12 @@
 import {apiConstants} from '../constants/apiContants'
-
 import axios, { AxiosResponse } from 'axios'
-import { Todo, todoServiceType } from '../types/todos';
+import { Todo, todoServiceInterface, TodoServiceTypes } from '../types/todos';
 
-
-export const todoService: todoServiceType = {
+export const todoService: any = {
     getAllTodos, deleteTodo, createTodo
 }
 
-
-
-function getAllTodos(): Promise<AxiosResponse<Todo[]>> {
+function getAllTodos(): TodoServiceTypes {
     return axios.get<Todo[]>(`${apiConstants}/todos`, {
         headers: {
             "Content-Type": "application/json"
@@ -18,7 +14,7 @@ function getAllTodos(): Promise<AxiosResponse<Todo[]>> {
     });
 }
 
-function deleteTodo(id: number): Promise<AxiosResponse<any>> {
+function deleteTodo(id: number): TodoServiceTypes {
     return axios.delete(`${apiConstants}/todos/${id}`, {
         headers: {
             "Content-Type": "application/json"
@@ -26,7 +22,7 @@ function deleteTodo(id: number): Promise<AxiosResponse<any>> {
     });
 }
 
-function createTodo(request: Todo): Promise<AxiosResponse<Todo>> {
+function createTodo(request: Todo): TodoServiceTypes {
 
     let body = JSON.stringify(request)
 

@@ -1,20 +1,21 @@
+import { AxiosError, AxiosResponse } from 'axios';
 import { Dispatch } from 'react';
 import { todoConstants } from '../constants'
 import { todoService } from '../services/todoService'
-import { Todo, TodoActionTypes } from '../types/todos';
+import { AxiosErrorResponse, Todo, TodoActionTypes } from '../types/todos';
 
 export const todoActions = {getAllTodos, deleteTodo, createTodo}
 
-function getAllTodos(service = todoService.getAllTodos) {
-    return (dispatch: Dispatch<any>) => {
+function getAllTodos(service: any = todoService.getAllTodos) {
+    return (dispatch: Dispatch<TodoActionTypes>) => {
 
         dispatch(request());
 
         return service().then(
-            (response: any) => {
+            (response: AxiosResponse<Todo[]>) => {
                 dispatch(success(response.data));
             },
-            (error: any) => {
+            (error: AxiosErrorResponse) => {
                
                 dispatch(failure(error.response.data.message));
                
@@ -38,14 +39,14 @@ function getAllTodos(service = todoService.getAllTodos) {
 
 function deleteTodo(id: number, service = todoService.deleteTodo) {
 
-    return (dispatch: Dispatch<any>) => {
+    return (dispatch: Dispatch<TodoActionTypes>) => {
         dispatch(request(id))
 
         return service(id).then(
-            (response: any) => {
+            (response: AxiosResponse<any>) => {
                 dispatch(success(response.data));
             },
-            (error: any) => {
+            (error: AxiosErrorResponse) => {
                 dispatch(failure(error.response.data.message));
             }
         )
@@ -66,14 +67,14 @@ function deleteTodo(id: number, service = todoService.deleteTodo) {
 
 function createTodo(todoRequest: Todo, service = todoService.createTodo) {
 
-    return (dispatch: Dispatch<any>) => {
+    return (dispatch: Dispatch<TodoActionTypes>) => {
         dispatch(request(todoRequest))
 
         return service(todoRequest).then(
-            (response: any) => {
+            (response: AxiosResponse<any>) => {
                 dispatch(success());
             },
-            (error: any) => {
+            (error: AxiosErrorResponse) => {
                 dispatch(failure(error.response.data.message));
             }
         )

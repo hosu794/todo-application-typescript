@@ -1,4 +1,5 @@
 import { Container } from '@material-ui/core'
+import { AxiosResponse } from 'axios';
 import { todoConstants as constants} from '../../constants'
 
 export type Todo = {
@@ -8,12 +9,20 @@ export type Todo = {
     completed: boolean
 }
 
-export type todoServiceType = {
-    getAllTodos: Function,
-    deleteTodo: Function,
-    createTodo: Function
+export interface todoServiceInterface  {
+
+    getAllTodos():Promise<AxiosResponse<Todo[]>>;
+
+    deleteTodo(id: number): Promise<AxiosResponse<any>>;
+
+    createTodo(request: Todo): Promise<AxiosResponse<Todo>>;
 }
 
+export type GetAllTodosService = Promise<AxiosResponse<Todo[]>>;
+export type DeleteTodoService = Promise<AxiosResponse<any>>;
+export type CreateTodoService = Promise<AxiosResponse<Todo>>;
+
+export type TodoServiceTypes = GetAllTodosService | DeleteTodoService | CreateTodoService;
 
 export interface GetAllTodosRequestAction {
     type: typeof constants.GET_ALL_TODOS_REQUEST,
@@ -64,3 +73,6 @@ export type TodoActionTypes = GetAllTodosRequestAction | GetAllTodosSuccessActio
  deleteTodoSuccessAction | deleteTodoFailureAction | createTodoRequestAction | 
  createTodoSuccessAction | createTodoFailureAction;
 
+ export interface AxiosErrorResponse extends AxiosResponse {
+    response: { data: { message: Error }}
+  }
