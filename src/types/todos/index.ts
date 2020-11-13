@@ -74,5 +74,5 @@ export type TodoActionTypes = GetAllTodosRequestAction | GetAllTodosSuccessActio
  createTodoSuccessAction | createTodoFailureAction;
 
  export interface AxiosErrorResponse extends AxiosResponse {
-    response: { data: { message: Error }}
+    response: {data: {message: Error}}
   }

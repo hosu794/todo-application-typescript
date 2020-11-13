@@ -21,7 +21,7 @@ export default function todoReducer(state: initialStateTodos = {todos: []}, acti
             return {
                 ...state, 
                 loading: false, 
-                todos: [...action.payload]
+                todos: [action.payload]
             }
         case contants.GET_ALL_TODOS_FAILURE: 
         case contants.DELETE_TODO_FAILURE:
