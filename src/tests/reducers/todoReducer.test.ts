@@ -9,7 +9,7 @@ let todo: Todo = {
     "completed": false
   }
 
-let todos: Todo[] = 
+ let todos: Todo[] = 
 [
     {
       "userId": 1,

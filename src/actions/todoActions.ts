@@ -1,5 +1,6 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { Dispatch } from 'react';
+import { AnyAction } from 'redux';
 import { todoConstants } from '../constants'
 import { todoService } from '../services/todoService'
 import { AxiosErrorResponse, Todo, TodoActionTypes } from '../types/todos';
@@ -44,6 +45,7 @@ function deleteTodo(id: number, service = todoService.deleteTodo) {
 
         return service(id).then(
             (response: AxiosResponse<any>) => {
+                
                 dispatch(success(response.data));
             },
             (error: AxiosErrorResponse) => {
